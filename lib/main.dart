@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './widgets/chart.dart';
+import './widgets/transaction_list.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,10 +29,10 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[Icon(Icons.add)],
       ),
       body: Column(
-          // chart
-
-          // transaction_list
-          ),
+        // chart
+        children: <Widget>[Chart(), TransactionList()],
+        // transaction_list
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
