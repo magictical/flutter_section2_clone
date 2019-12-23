@@ -15,14 +15,32 @@ class TransactionList extends StatelessWidget {
             children: <Widget>[
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.purple, width: 2),
+                ),
+                padding: EdgeInsets.all(10),
                 child: Text(
                   '\$ ${transaction.amount}',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.purple),
                 ),
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(transaction.title),
-                  Text(DateFormat('yyyy MM/DD').format(transaction.date))
+                  Text(
+                    transaction.title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    DateFormat('yyyy MM/DD').format(transaction.date),
+                    style: TextStyle(color: Colors.grey),
+                  ),
                 ],
               ),
             ],
