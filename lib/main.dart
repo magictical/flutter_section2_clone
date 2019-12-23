@@ -62,6 +62,30 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
   ];
 
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime chosenDate) {
+    final newTx = Transaction(
+        title: txTitle,
+        amount: txAmount,
+        date: chosenDate,
+        id: DateTime.now().toString());
+
+    setState(() {
+      _userTransactions.add(newTx);
+    });
+  }
+
+  void startAddNewTransaction(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (_) {
+          return GestureDetector(
+            onTap: () {},
+            child: NewTransAction(_addNewTransaction),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,19 +93,20 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Personal Expense'),
         actions: <Widget>[Icon(Icons.add)],
       ),
-      body: Column(
-        // chart
-        children: <Widget>[
-          Chart(),
-          SingleChildScrollView(
-            child: TransactionList(_userTransactions),
-          )
-        ],
-        // transaction_list
+      body: SingleChildScrollView(
+        child: Column(
+          // chart
+          children: <Widget>[
+            Chart(),
+            TransactionList(_userTransactions),
+          ],
+          // transaction_list
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
+        onPressed: () => startAddNewTransaction(context),
       ),
     );
   }
