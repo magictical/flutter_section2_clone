@@ -12,6 +12,23 @@ class NewTransAction extends StatefulWidget {
 class _NewTransActionState extends State<NewTransAction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  DateTime _selectedDate;
+
+  void _presentDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime.now().subtract(Duration(days: 365)),
+            lastDate: DateTime.now())
+        .then((pickDate) {
+      if (pickDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickDate;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +56,10 @@ class _NewTransActionState extends State<NewTransAction> {
                 ),
                 FlatButton(
                   child: Text('Choose Date'),
-                )
+                  onPressed: () {
+                    _presentDatePicker();
+                  },
+                ),
               ],
             ),
           ),
