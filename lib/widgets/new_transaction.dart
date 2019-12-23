@@ -14,6 +14,23 @@ class _NewTransActionState extends State<NewTransAction> {
   final _amountController = TextEditingController();
   DateTime _selectedDate;
 
+  void _submitData() {
+    // data validation
+    if (_amountController.text.isEmpty) {
+      return;
+    }
+
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
+
+    // check valid
+    if (enteredTitle.isEmpty || enteredAmount < 0 || _selectedDate == null) {
+      return;
+    }
+    widget.transactionHandler(enteredTitle, enteredAmount, _selectedDate);
+    Navigator.of(context).pop();
+  }
+
   void _presentDatePicker() {
     showDatePicker(
             context: context,
@@ -65,6 +82,9 @@ class _NewTransActionState extends State<NewTransAction> {
           ),
           RaisedButton(
             child: Text('Submit'),
+            onPressed: () {
+              _submitData();
+            },
           )
         ],
       ),
