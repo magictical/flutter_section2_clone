@@ -36,9 +36,15 @@ class _NewTransActionState extends State<NewTransAction> {
               children: <Widget>[
                 Expanded(
                   child: Text('date filed'),
+                ),
+                FlatButton(
+                  child: Text('Choose Date'),
                 )
               ],
             ),
+          ),
+          RaisedButton(
+            child: Text('Submit'),
           )
         ],
       ),
